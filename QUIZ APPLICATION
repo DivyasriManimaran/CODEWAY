@@ -1,0 +1,95 @@
+import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
+
+class QA 
+{
+    private static int score = 0;
+    private static int currentQuestion = 0;
+    private static boolean timeExpired = false;
+
+    static class QuizTimer extends TimerTask 
+{
+        @Override
+        public void run() 
+{
+            System.out.println("\nTime's up! Moving to the next question.");
+            timeExpired = true;
+}
+}
+
+    static class Question 
+{
+        String questionText;
+        String[] options;
+        int correctOption;
+
+        public Question(String questionText, String[] options, int correctOption) 
+{
+            this.questionText = questionText;
+            this.options = options;
+            this.correctOption = correctOption;
+        
+}
+    
+}
+
+    static Question[] quizQuestions = 
+{
+            new Question("What is the capital of France?", new String[]{"A. Berlin", "B. Paris", "C. Rome", "D. Madrid"}, 1),
+           
+};
+
+    public static void main(String[] args) 
+{
+        Timer timer = new Timer();
+
+        for (Question question : quizQuestions) 
+{
+            displayQuestion(question);
+            startTimer(timer);
+
+           
+            Scanner scanner = new Scanner(System.in);
+            int userAnswer = scanner.nextInt();
+
+           
+            if (!timeExpired && userAnswer == question.correctOption) 
+{
+                System.out.println("Correct!");
+                score++;
+} 
+	    else if (!timeExpired) 
+{
+                System.out.println("Incorrect. The correct answer is: " + question.options[question.correctOption - 1]);
+} 	
+	    else 
+{
+                System.out.println("Time's up! The correct answer is: " + question.options[question.correctOption - 1]);
+}
+
+            
+            timeExpired = false;
+}
+
+     
+        System.out.println("\nQuiz completed. Your final score is: " + score + "/" + quizQuestions.length);
+        timer.cancel();
+
+}
+
+    	private static void displayQuestion(Question question) 
+{
+        System.out.println("\n" + question.questionText);
+        for (String option : question.options) 
+{
+        System.out.println(option);
+}
+        System.out.print("Your answer (enter the option number): ");
+}
+
+    	private static void startTimer(Timer timer) 
+{
+        timer.schedule(new QuizTimer(), 15000); 
+}
+}
