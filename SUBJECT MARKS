@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+class marks 
+{
+    public static void main(String[] args) {
+    Scanner in = new Scanner(System.in);
+
+    System.out.println("Enter the marks of five subjects::\n");
+
+        
+        float sub_1 = in.nextFloat();
+        float sub_2 = in.nextFloat();
+        float sub_3 = in.nextFloat();
+        float sub_4 = in.nextFloat();
+        float sub_5 = in.nextFloat();
+
+        float Total;
+        float Average;
+        float Percentage;
+        char Grade;
+
+       
+        Total = sub_1 + sub_2 + sub_3 + sub_4 + sub_5;
+        Average = (float)(Total / 5.0);
+        Percentage = (float)((Total/500.0)*100);
+
+        
+        if (Average >= 90)
+            Grade = 'A';
+        else if (Average >= 80 && Average < 90)
+            Grade = 'B';
+        else if (Average >= 70 && Average < 80)
+            Grade = 'C';
+        else if (Average >= 60 && Average < 70)
+            Grade = 'D';
+        else
+            Grade = 'E';
+
+        
+        System.out.println("\nThe Total marks   = " + Total + "/500.0");
+        System.out.println("The Average marks = " + Average);
+        System.out.println("The Percentage    = " + Percentage + "%");
+        System.out.println("The Grade         = '" + Grade + "'");
+    }
+}
